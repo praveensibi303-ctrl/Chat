@@ -25,21 +25,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: npm
-          cache-dependency-path: client/package-lock.json
 
       - name: Install dependencies
         working-directory: client
-        run: npm ci
+        run: npm install
 
       - name: Build
         working-directory: client
         env:
-          # ── IMPORTANT: set these in repo Settings → Variables → Actions ──
-          # SERVER_URL  → your Render backend, e.g. https://ephemeral-chat-server.onrender.com
-          # BASE_PATH   → /<repo-name>/  (or / if using a custom domain)
-          VITE_SERVER_URL: ${{ vars.SERVER_URL }}
-          VITE_BASE_PATH: ${{ vars.BASE_PATH }}
+          VITE_SERVER_URL: https://chat-a4yx.onrender.com
+          VITE_BASE_PATH: /Chat/
         run: npm run build
 
       - name: Upload Pages artifact
